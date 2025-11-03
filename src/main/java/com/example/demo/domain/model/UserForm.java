@@ -49,7 +49,7 @@ public class UserForm {
 	public void setAge(Integer age){ this.age = age; }
 	
     @Size(max = 20, message = "備考は20文字以内で入力してください。", groups = Group2.class)
-	private String remarks;
+	private String note;
 	@PostMapping("/form")
 	public String submit(@Validated(UserForm.Groups.class) @ModelAttribute UserForm form, BindingResult result) {
 	    if(result.hasErrors()) {
@@ -57,11 +57,16 @@ public class UserForm {
 	    }
 	    return "result";
 	}
-	public String getRemarks() {
-		return remarks;
+	public String getnote() {
+		return note;
 	}
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
+	public void setnote(String note) {
+		this.note = note;
+	}
+	public Object getNote() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+
 	}
 
 
