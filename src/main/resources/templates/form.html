@@ -2,41 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="/css/form.css" rel="stylesheet"></link>
+    <title>ユーザーフォーム</title>
+    <link href="/css/form.css" rel="stylesheet">
 </head>
 <body>
-<body>
-
 <form th:action="@{/form}" th:object="${userForm}" method="post">
-
-	<table>
-	    <tr>
-	        <th class="cell_title">氏名</th>
-	        <th class="cell_required">※</th>
-	        <td>
-	            <input type="text" th:field="*{name}">
-	            <span th:errorclass="error_text" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-	        </td>
-	    </tr>
-	    <tr>
-	        <th class="cell_title">E-Mail</th>
-	        <th class="cell_required"></th>
-	        <td>
-	            <input type="text" th:field="*{email}">
-	            <span th:errorclass="error_text" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-	        </td>
-	    </tr>
-	    <tr>
-	        <th class="cell_title">年齢</th>
-	        <th class="cell_required">※</th>
-	        <td>
-	            <input type="number" th:field="*{age}">
-	            <span th:errorclass="error_text" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
-	        </td>
-	    </tr>
-	</table>
-	<button class="btn">送信</button>
+    <table>
+        <tr>
+            <th class="cell_title">氏名</th>
+            <th class="cell_required">※</th>
+            <td>
+                <input type="text" th:field="*{name}">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;"></span>
+            </td>
+        </tr>
+        <tr>
+            <th class="cell_title">E-Mail</th>
+            <th class="cell_required"></th>
+            <td>
+                <input type="text" th:field="*{email}">
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red;"></span>
+            </td>
+        </tr>
+        <tr>
+            <th class="cell_title">年齢</th>
+            <th class="cell_required">※</th>
+            <td>
+                <input type="number" th:field="*{age}">
+                <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color:red;"></span>
+            </td>
+        </tr>
+		<tr>
+		    <th class="cell_title">備考</th>
+		    <th class="cell_required"></th>
+		    <td>
+		        <input type="text" th:field="*{remarks}" />
+		        <span th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}" style="color:red; margin-left:10px;"></span>
+		    </td>
+		</tr>
+    </table>
+    <button type="submit" class="btn">送信</button>
 </form>
 </body>
 </html>

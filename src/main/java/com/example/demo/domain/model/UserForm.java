@@ -1,6 +1,11 @@
 package com.example.demo.domain.model;
 
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import jakarta.validation.GroupSequence;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
@@ -27,11 +32,38 @@ public class UserForm {
     @Min(value = 0, message = "年齢は0以上を入力してください。", groups = Group2.class)
     @Max(value = 100, message = "年齢は100以下を入力してください。", groups = Group2.class)
     private Integer age;
+    
+
+
+    @GroupSequence({Group1.class, Group2.class})
+    public interface Groups {}
 
     public interface Group1 {}
     public interface Group2 {}
 
-    @GroupSequence({Group1.class, Group2.class})
-    public interface Groups {}
+    public String getName(){ return name; }
+	public void setName(String name){ this.name = name; }
+	public String getEmail(){ return email; }
+	public void setEmail(String email){ this.email = email; }
+	public Integer getAge(){ return age; }
+	public void setAge(Integer age){ this.age = age; }
+	
+    @Size(max = 20, message = "備考は20文字以内で入力してください。", groups = Group2.class)
+	private String remarks;
+	@PostMapping("/form")
+	public String submit(@Validated(UserForm.Groups.class) @ModelAttribute UserForm form, BindingResult result) {
+	    if(result.hasErrors()) {
+	        return "form";
+	    }
+	    return "result";
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+
 
 }

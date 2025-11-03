@@ -14,18 +14,21 @@ import com.example.demo.domain.model.UserForm;
 public class RegisterController {
 
     @GetMapping("/form")
-    private String readForm(@ModelAttribute UserForm userForm) {
+    public String readForm(@ModelAttribute UserForm userForm) {
         return "form";
     }
 
     @PostMapping("/form")
-    private String confirm(@Validated(UserForm.Groups.class) @ModelAttribute UserForm userForm, BindingResult result, Model model) {
+    public String confirm(
+            @Validated(UserForm.Groups.class) @ModelAttribute UserForm userForm,
+            BindingResult result,
+            Model model) {
 
         if (result.hasErrors()) {
-            // エラーがある場合、form.htmlに戻る
+            // エラーがある場合はフォーム画面に戻る
             return "form";
         }
 
-        return "confirm";
+        return "confirm"; // 入力に問題なければ確認画面
     }
 }
