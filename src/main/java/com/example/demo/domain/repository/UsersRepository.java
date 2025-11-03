@@ -8,5 +8,5 @@ import com.example.demo.domain.entity.Users;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Integer> {
     
-    boolean existsByMailAddress(String mailAddress);
+    boolean existsByEmail(String email);
 }

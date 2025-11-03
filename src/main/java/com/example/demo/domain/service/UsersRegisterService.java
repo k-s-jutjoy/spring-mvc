@@ -30,7 +30,7 @@ public class UsersRegisterService {
     
     public boolean isValid(UserForm userForm, BindingResult result) {
         // メールアドレスの重複チェック
-        if (userForm.getEmail() != null && usersRepository.existsByMailAddress(userForm.getEmail())) {
+        if (userForm.getEmail() != null && usersRepository.existsByEmail(userForm.getEmail())) {
             result.rejectValue("email", null, "既に登録されているE-Mailです。");
             return true; // エラーあり
         }
